@@ -1,15 +1,10 @@
-# Infinite Runner Game
-
-In this project, we will create a 2D infinite runner game in Haskell. Akin to Chrome's Dinosaur Game or Flappy Bird, this game will consist of simple
-mechanics and a fun gameplay loop that can entertain for hours. Taking on this task, in a field dominated by object-oriented or procedural languages, will provide unique learning opportunities, and really push the boundaries of what functional languages can do, especially in terms of IO.
-
-Leave the following sentence in so you can easily link back to the requirements and _especially_ rubric while editing your project:
+# A Snail's Adventure!
 
 This project is in fulfillment of the [CPSC 312 2024W1 project requirements](https://steven-wolfman.github.io/cpsc-312-website-2024W1/project.html).
 
-## Team Members
+## Team Haskell
 
-Our team is:
+Our team (named Haskell) is:
 
 - Matthew Smith (51209682)
 - Mo Fardinzaman (57779167)
@@ -22,22 +17,35 @@ Our team is:
 We surely built on the work of others! Here are resources and people we got support from:
 
 - The quickstart guide in Haskell's [game-dev page](https://haskell-game.dev/packages/sdl2.html)
-- General guide from https://github.com/JeremiahCheatham/Yellow-Snow/blob/main/Haskell-SDL2/app/Main.hs
+- This [game](https://github.com/JeremiahCheatham/Yellow-Snow/blob/main/Haskell-SDL2/app/Main.hs) was used as inspiration from this, and as a reference for Haskell SDL2 examples
 - Haskell Wiki's instructions on installing SDL2 on Windows https://wiki.haskell.org/SDL/Windows
 - Windows SDL2 installation via stack https://www.reddit.com/r/haskellgamedev/comments/4jpthu/windows_sdl2_is_now_almost_painless_via_stack/
 - GitHub issue for windows sdl2 installation via stack https://github.com/haskell-game/sdl2/issues/277
 
-## Product Pitch (Nick, Danielle)
+### Assets
 
-### Project Proposal: Infinite Runner Game in Haskell
+All game assets used are available for use on this project under their respective licenses.
 
-#### Vision
+- Background music: https://madmakingmistery.itch.io/jungle-confusion
+- SFX: https://spikyandrew.itch.io/playful-8-bit-sounds-and-music
+- Snail sprite: https://dustdfg.itch.io/pixel-art-snail
+- Stickbug sprite: https://gamebetweenthelines.itch.io/animated-side-scroller-stick-bug-enemy
+- Bird sprite: https://ankousse26.itch.io/bird-flying-pixel-art-animation-free
+- Background and tileset: https://jesse-m.itch.io/jungle-pack?download
 
-The project aims to develop an infinite runner game similar to Chrome’s Dino game, where a player-controlled sprite navigates through a dynamic environment with diverse obstacles and an increasing level of difficulty over time.
+## Proposal
 
-The driving force behind this project is to expand our knowledge of Haskell by using it for a fun and unconventional purpose (real-time game development). This will challenge the boundaries of functional programming to be able to manage mutable state, handle real-time user input, update the game environment, and render the display efficiently via SDL2 (Simple DirectMedia Layer). The project will allow us to deepen our understanding of I/O Monads, while exploring new concepts including the integration of modules and design patterns related to game development that weren't covered in CPSC 312.
+Take a look at our original project proposal [here](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/tree/main/haskell#:~:text=2%20months%20ago-,README.md,-Infinite%20Runner%20Game).
 
-#### Minimum Viable Product: A simple 1-level version of the Infinite Runner game with:
+## Video Demo
+
+Take a look at a video demo on youtube [here](https://www.youtube.com/watch?v=GmSql6xqbA4).
+
+## Guide to the MVP
+
+### How the MVP fulfills the proposal
+
+The MVP set out to complete these tasks:
 
 - A single type of obstacle moving at a static pace
 - A basic scoring system that increments over time
@@ -45,111 +53,112 @@ The driving force behind this project is to expand our knowledge of Haskell by u
 - Game over detection when the player collides with an obstacle
 - The ability to restart the game after losing
 
-#### Proof of Concept
+Here is how we have accomplished these goals:
 
-A working SDL2 window that displays a basic rectangular red sprite that the player can move left and right using keyboard inputs. This will serve as the foundation for the runner mechanics by showing the ability to handle basic input, rendering, and movement logic using Haskell and SDL2.
+1. The game spawns an enemy (the stickbug), and assigns it a random x-location on the right of the screen, and a random speed. This pace does not change after it is spawned.
+2. The game implements a basic scoring system, which is related to the number of seconds the player has currently survived. This is displayed on screen, and counts up every second.
+3. Every frame, the game update queries every enemy to check whether or not they are currently colliding with the player. This is done through implicit equations determining if the player rectangle and enemy rectangle intersect. This is how we define collisions in our game.
+4. When a collision occurs, we end the game loop, and send the player to the title screen. This is our "game-over detection".
+5. On the title screen and game-over screen, the player has the choice between quitting the application, or trying again to beat their previous score.
 
-## Minimal Viable Project (Mo, Devin)
+We took several significant steps beyond our (core) proposed MVP. Notably,
 
-The MVP will focus on implementing the core mechanics of our endless runner game. This will focus on player movement, obstacle generation, and collision detection. The game will continuously generate obstacles that the player must avoid by jumping up and down whilst the game moves the screen for you. We will concentrate on building a basic game loop that handles user input, a basic scoring system that increments as time progresses, simple collision detection to trigger a game-over state, and the option to restart the game after a loss.
+6. Added an additional enemy (the bird). This adds an additional gameplay element to our game, and makes it more exciting to play
+7. Added high-score functionality, allowing users to persist their best score to disk, and try their best at beating their old records.
+8. Scaling difficulty levels that make enemy spawns more common, and vary enemy type as the game progresses. This rewards players with a more exciting gameplay experience as their run progresses.
+9. Added a wide array of quality of life features to make the game very fun and visually appealing. These include:
+   - A multi-layer parallax side-scrolling background to give a pseudo-3D effect to the game
+   - Player, background, stickbug, and bird animations to give the game more life
+   - Sound effects for confirming starting the game, quitting the game, jumping, leveling-up (reaching a new difficulty threshold), and dying
+   - A jungle-themed looping background track that immerses the player in the environment
 
-This MVP is a scaled-down version of the full project, allowing us to focus on the fundamental mechanics without the need for animations, character sprites, diverse level generations/obstacles, complex movements, or power-ups. By concentrating on the essential elements, we can ensure that the project is manageable and achievable within the shorter timeframe while still providing a soild gameplay experience. This allows to refine the core user experience before expanding on them in a final version.
+All of these features take our MVP above and beyond our core proposed MVP, making our game robust, visually appealing, and tons of fun.
 
-This MVP builds on the strengths of Haskell's functional programming paradigms to manage game state and logic. Furthermore, Haskell's immutability ensures that state updates, such as player positions, obstacle locations, and game progression, are handled predictably. Recursion is ideal for iterating over the game loop, allowing us to cleanly manage repeated actions like updating the screen adn checking for collisions. Additionally, Haskell's strong type system allows us to define custom types for game entities, ensuring that data is handled consistently adn reducing the likelihood of runtime errors. Finally, the type class system allows us to easily expand on the game in the future.
+### Code links
 
-Working on this project will naturally lead to learning and applying advanced Haskell concepts, such as monads, which is key for managing side effects like user input and other IO operations. By using monads, we can effectly handle IO actions within the game loop, ensuring that our functional approach remains intact while dealing with interactive elements. This will deepen our understanding of how Haskell handles state changes and IO in a purely functional context, helping us to develop clean, modular code that maintains Haskell's core principles.
+The code links for the numbered sections above are as follows:
 
-## Proof of Concept (Matthew)
+1. [First enemy](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/99bdfcb71bb79d5ef9d5ce75a7178aa8987f0d30/haskell/src/Enemy.hs#L18C1-L56C6)
+2. [Scoring system](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/99bdfcb71bb79d5ef9d5ce75a7178aa8987f0d30/haskell/src/UI.hs#L1-L35)
+3. [Collision system](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/99bdfcb71bb79d5ef9d5ce75a7178aa8987f0d30/haskell/src/Game.hs#L78-L91)
+4. [Game-over](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/99bdfcb71bb79d5ef9d5ce75a7178aa8987f0d30/haskell/app/Main.hs#L138-L141)
+5. [Retry screen (code is shared with title-screen)](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/99bdfcb71bb79d5ef9d5ce75a7178aa8987f0d30/haskell/src/Title.hs#L17-L76)
+6. [Additional enemy](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/99bdfcb71bb79d5ef9d5ce75a7178aa8987f0d30/haskell/src/Enemy.hs#L58-L97)
+7. [High-score](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/99bdfcb71bb79d5ef9d5ce75a7178aa8987f0d30/haskell/src/Game.hs#L66-L75)
+8. [Difficulty](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/99bdfcb71bb79d5ef9d5ce75a7178aa8987f0d30/haskell/src/Game.hs#L54-L64)
+9. Sounds and Visuals
+   - [Background implementation](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/99bdfcb71bb79d5ef9d5ce75a7178aa8987f0d30/haskell/src/Background.hs#L12-L60)
+   - [Textures](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/99bdfcb71bb79d5ef9d5ce75a7178aa8987f0d30/haskell/src/Texture.hs#L1-L76) and [animations](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/99bdfcb71bb79d5ef9d5ce75a7178aa8987f0d30/haskell/src/Entity.hs#L19-L31)
+   - [Sound effects](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/99bdfcb71bb79d5ef9d5ce75a7178aa8987f0d30/haskell/src/Music.hs#L12-L24)
+   - [Background music](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/99bdfcb71bb79d5ef9d5ce75a7178aa8987f0d30/haskell/app/Main.hs#L79-L80)
 
-5: Fully functional proof-of-concept is easy to use and review, and it clearly demonstrates a key element necessary for the overall project.
-This need not go above-and-beyond, but we will have high expectations for this mark.
-(I.e., we mean it when we say “fully functional”, easy-to-use/-review, and clear.)
+### How to run the MVP
 
-Replace this with a description of your proof-of-concept. This may be as short as a few paragraphs, or it may be longer.
-It should **definitely** take less than 4 minutes to read carefully and thoroughly, though working through and running the
-code may take an extra 4 minutes. (Your guidance and links should make it easy for us to work through the code.)
+#### Installation
 
-The key elements the proof-of-concept focuse on are resource setup and window management for our game. In order to make a game,
-it is imperative that we can create a simple and reliable GUI for our users to interact with. From the perspective of end users,
-this is the most important part of a game. Due to Haskell's functional nature, and how cumbersome IO can be with functional languages, this is no trivial task. Developing a framework to tackle these problems is precisely what we aim to tackle with our proof-of-concept.
-
-Our proof-of-concept accomplishes three vital components of our final game:
-
-1. **SDL IO management**. As mentioned above, IO is generally confusing and difficult in functional languages. Consequently, documentation on the use of rendering libraries like SDL is generally limited for Haskell. In order to reconcile this issue, this proof-of-concept aims to abstract some of this functionality. Particularly, we have defined a [game loop](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/3b7869cbdb57d69e804bb8d062cafbe7fd7ca6c3/haskell/app/Main.hs#L27-L50) and [initialization functions](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/3b7869cbdb57d69e804bb8d062cafbe7fd7ca6c3/haskell/app/Main.hs#L17-L24) to setup window resources and our rendering pipeline. Abstracting some of the particularly difficult IO concepts to core helper functions will accelerate our development for future milestones. With the groundwork laid out in this proof-of-concept, we can focus on writing idiomatic Haskell going forward.
-
-2. **Player state management**. Framing a game in an object-oriented mindset makes game development, and especially game design, much easier. This is more difficult in functional languages than some other object-oriented or procedural counterparts. In order to reconcile this, this proof-of-concept defines [data types](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/3b7869cbdb57d69e804bb8d062cafbe7fd7ca6c3/haskell/src/Move.hs#L6C1-L6C32) to help encapsulate the functionality of a player. In the future, this will include type classes as we begin to refactor and define what each type of object should be able to do in our game.
-
-3. **Simple player movement framework**. Because we plan on making a game in which the player runs horizontally across the screen, we felt it was important to develop a simple proof-of-concept of this [functionality](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/3b7869cbdb57d69e804bb8d062cafbe7fd7ca6c3/haskell/src/Move.hs#L12C1-L22C19). This work on being able to move the player highlights the power of the abstractions outlined in 1 and 2, and how this makes writing game-logic easier for subsequent checkpoints.
-
-Given the significant groundwork outlined above, we believe that subsequent work will come naturally from our framework, and the remainder of development will be simple.
-
-## How to test and run the code: Haskell
-
-In order to run our game, SDL2 must be installed. As such, the setup instructions have been separated by operating system.
-
-### MacOS / Linux instructions
-
-1. **[MacOS]** In order to install SDL2, we recommend using the popular "missing package manager" for MacOS: [homebrew](https://brew.sh/). If not already installed, please run the following command in your terminal (from their installation instructions on homebrew's website),
+1. We recommend using the popular "missing package manager" for MacOS: homebrew. If not already installed, please follow the instructions listed on their [website](https://brew.sh/).
 2. Ensure pkg-config is installed by running `pkg-config --version`. If not, install it using homebrew: `brew install pkg-config`.
 3. Ensure haskell-stack is installed by running `stack --version`. If not, install it using homebrew: `brew install haskell-stack`.
-4. For MacOS, install SDL2 with homebrew: `brew install sdl2`. You can check that this was installed correctly by running `brew info sdl2` (we're running version 2.30.8, as of writing). For Linux distributions, please install SDL2 using your favorite package manager of choice.
-5. From the Haskell project root, run the game with `make rungame` (see the Makefile for more details on what this does). You can move the character (the red square) with the left and right arrow keys. To quit the window, press "q".
-6. To run our unit tests for the movement logic, run `make test` from the Haskell project root.
+4. Install SDL2: `brew install sdl2`.
+5. Install SDL2_mixer: `brew install sdl2_mixer`
+6. Install SDL2_image: `brew install sdl2_image`
+7. Install SDL2_ttf: `brew install sdl2_ttf`
 
-**Note**: SDL2 does not [support opening windows](https://piazza.com/class/m0g7rf06fkhqb/post/147) from the interactive terminal (`ghci`), so please use `make rungame` in order to play the game.
+_Note_: you can follow the steps above using a different package manager of choice, if desired
 
-### Windows instructions
+### Playing the game
 
-Due to a known bug with stack install SDL2, it is quite difficult to get it working on Windows. Please use a Unix machine, emulator, or alternative with a robust package manager. The following crossed out instructions are here only for the sake of preserving this README's history; _they do not work_ properly after including the SDL2 extensions (image, mixer, ttf).
+To start the game, run `make rungame` from the haskell project root. Press spacebar or up-arrow to jump in-game!
 
-~~Install stack from the following link https://docs.haskellstack.org/en/stable/install_and_upgrade/#__tabbed_4_3~~
+## Guide to new learning
 
-~~Run each line below one by one in terminal~~
+### What we learned
 
-~~``stack setup;`~~
+We dove deeper on the following concepts in Haskell:
 
-~~`stack exec -- pacman -Syu`~~
+1. Numbers
+   - In our project, we explored and learned lots about differnt Numeral classes in Haskell. This required us to dive deep into the world of `Integer`, `CInt`, `Float`, `Double`, and `Word32`. While seemingly innocuous from a first glance, simple conversions between these sorts of types is taken for granted when writing code in other languages like Python. Serious thought went into the choice of the different number class for the fields in all of our data structures in this project so as to conform to existing APIs in SDL, and also to support the necessary amount of precision for seamless movement, animation, and score counting.
+2. Random number generation
+   - Random number generation is another concept that is often overlooked as trivial in many procedural languages. Generally speaking, these languages store some sort of global RNG seed state so as to ensure the pseudo-random number generator produces (basically) unique sequences every time a random number is requested. In a functional language however, this is a _huge_ red flag. How can a _function_ with the same output return a different (random number) upon subsequent calls? Of course, this is the desired effect, so Haskell solves this (like many other "weird" programming things in functional languages) with monads and IO. We encourage the reader to think critically about this: isn't it weird that random numbers are related to _IO_ (minds blown weekly ™️)?
+3. Abstraction and data structures
+   - When undergoing a software project, our group members longed for some of the familiar and handy language features we know and love. The most notable example are classes, and to a similar extent, structs. We dove deeper on this topic in Haskell, and discovered the handy "record" syntax. This syntax allowed us to easily create data-classes with _named_ built-in getters. Moreover, we combined these record data-classes with type-classes to provide interfaces and abstract method implementations. This made development a lot smoother, more robust, and familiar.
+   - In order to make performance optimizations, we pre-rendered many textures in a `TextureMap` data structure. This allowed us to reap the rewards of not having to recreate these objects through slow IO operations every single frame.
+4. Lots and lots and lots of IO (yay Monads!)
+   - By design, a game requires a lot of IO. Naturally, this required us to learn not only a lot about IO in Haskell, but also the SDL library in general. In doing this, we read lots of SDL documentation in order to manage the external library. We also learned a lot about various syntax features and quirks in Haskell (such as `do` and other features from `Control Mondads`).
 
-~~`stack exec -- pacman -S mingw-w64-x86_64-pkg-config`~~
+### Code links
 
-~~At this point normally one could run stack install SDL2, but due to a known bug described in the GitHub issue below it does not work. Instead, we have manually included the required SDL2 packages in our repo. Please complete the following instructions to complete the manual install. (Generally, we are following the workaround noted here: https://github.com/haskell-game/sdl2/issues/277#issuecomment-2283057736).~~
+The code links for the numbered sections above are as follows:
 
-~~1. While in the root project directory, run the command: `stack exec -- bash` to open an interactive shell~~
-~~2. Paste these 12 lines into the interactive shell, 3 for each package:~~
+1. Numbers
+   - [Conversion between Word32 and CInt](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/f67c6a502d1aa4b09aaae0be26703dca7f5fc7ce/haskell/src/Settings.hs#L19-L20)
+   - [Conversion between CInts and Doubles](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/f67c6a502d1aa4b09aaae0be26703dca7f5fc7ce/haskell/src/Settings.hs#L22-L23)
+   - [Example of number diversity in code](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/f67c6a502d1aa4b09aaae0be26703dca7f5fc7ce/haskell/src/Entity.hs#L33-L38)
+   - [Double-point precision for physics and gravity in player movement](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/f67c6a502d1aa4b09aaae0be26703dca7f5fc7ce/haskell/src/Player.hs#L42-L100)
+2. Random number generation
+   - [Random speed of enemies](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/f67c6a502d1aa4b09aaae0be26703dca7f5fc7ce/haskell/src/Enemy.hs#L93)
+   - [Random position of enemies](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/f67c6a502d1aa4b09aaae0be26703dca7f5fc7ce/haskell/src/Enemy.hs#L89)
+   - [Random enemy type generation](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/f67c6a502d1aa4b09aaae0be26703dca7f5fc7ce/haskell/src/Enemy.hs#L85-L87)
+3. Data structures
+   - [Record syntax use for textures](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/f67c6a502d1aa4b09aaae0be26703dca7f5fc7ce/haskell/src/Texture.hs#L28-L76)
+   - [Entity type class](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/f67c6a502d1aa4b09aaae0be26703dca7f5fc7ce/haskell/src/Entity.hs#L9-L31)
+   - [Extension of entity by player](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/f67c6a502d1aa4b09aaae0be26703dca7f5fc7ce/haskell/src/Player.hs#L38-L100)
+   - [Extension of entity by enemy](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/f67c6a502d1aa4b09aaae0be26703dca7f5fc7ce/haskell/src/Enemy.hs#L23-L42)
+4. IO
+   - [SDL resource creation](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/f67c6a502d1aa4b09aaae0be26703dca7f5fc7ce/haskell/app/Main.hs#L27-L43)
+   - [SDL resource clean-up](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/f67c6a502d1aa4b09aaae0be26703dca7f5fc7ce/haskell/app/Main.hs#L45-L48)
+   - [Playing music](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/f67c6a502d1aa4b09aaae0be26703dca7f5fc7ce/haskell/src/Music.hs#L17-L24)
+   - [Rendering to screen](https://github.students.cs.ubc.ca/magsubc/cpsc-312-project/blob/f67c6a502d1aa4b09aaae0be26703dca7f5fc7ce/haskell/src/Background.hs#L17-L60)
 
-~~SDL2 package:~~
+### How the project benefits from our new learning
 
-~~`cp SDL2-2.30.6/x86_64-w64-mingw32/lib/\* -r /mingw64/lib/`~~
+The project benefits follow,
 
-~~`cp SDL2-2.30.6/x86_64-w64-mingw32/include/\* -r /mingw64/include/`~~
-
-~~`cp SDL2-2.30.6/x86_64-w64-mingw32/bin/\* -r /mingw64/bin/`~~
-
-
-~~SDL2_image package:~~
-
-~~`cp SDL2_image-2.8.2/x86_64-w64-mingw32/lib/\* -r /mingw64/lib/`~~
-
-~~`cp SDL2_image-2.8.2/x86_64-w64-mingw32/include/\* -r /mingw64/include/`~~
-
-~~`cp SDL2_image-2.8.2/x86_64-w64-mingw32/bin/\* -r /mingw64/bin/`~~
-
-~~SDL2_mixer package:~~
-
-~~`cp SDL2_mixer-2.8.0/x86_64-w64-mingw32/lib/\* -r /mingw64/lib/`~~
-
-~~`cp SDL2_mixer-2.8.0/x86_64-w64-mingw32/include/\* -r /mingw64/include/`~~
-
-~~`cp SDL2_mixer-2.8.0/x86_64-w64-mingw32/bin/\* -r /mingw64/bin/`~~
-
-~~SDL2_ttf package:~~
-
-~~`cp SDL2_ttf-2.22.0/x86_64-w64-mingw32/lib/\* -r /mingw64/lib/`~~
-
-~~`cp SDL2_ttf-2.22.0/x86_64-w64-mingw32/include/\* -r /mingw64/include/`~~
-
-~~`cp SDL2_ttf-2.22.0/x86_64-w64-mingw32/bin/\* -r /mingw64/bin/`~~
-
-~~3. You may now type `exit` to exit the interactive shell.~~
-~~4. You should now be set up to play the game! From the `haskell` project root directory, run the game with command `make rungame` (see the Makefile for more details on what this does). You can move the character with the left and right arrow keys. To quit the window, press `q`.~~
-~~5. Optionally, you can run our unit tests for the movement logic by typing command `make test` from the Haskell project root directory~~
+1. Numbers
+   - The careful choice of numbers and their conversion is vital for our project. All of our game updates operate with a `deltaTime` parameter. This allows the game to run identically, independent of frame-rate. This allows users of our game to have a similar experience, regardless of how fast their computers are. Additionally, these decisions are vital for the physics performance of the player and enemies, as well as pixel-perfect rendering of the textures
+2. Random number generation
+   - While relatively small in terms of line-number, random number generation is the true keystone of our project. This is one of the main gameplay elements, making the gameplay experience fun with a high amount of replayability. It also makes the game more visually appealing and less robotic; hence better emulating the jungle scene on the screen.
+3. Data structures
+   - The data structures and code abstraction used above was vital for our project completion and team collaboration. By making easy-to-use and robust APIs we have made our code easily extensible for future features, and also easy to test, debug, and work on asynchonrously in a team-environment.
+4. IO
+   - Without deliberate IO management and use within our project, we would not have a project at all. SDL is the core of our project, and is directly required for audio management, rendering to the screen, and taking keyboard input to control the player.
